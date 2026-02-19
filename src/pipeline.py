@@ -4,12 +4,6 @@ from langchain_community.document_loaders import PyPDFLoader
 
 
 SUPPORTED_EXTENSIONS = {".pdf", ".txt", ".md", ".csv"}
-READER_DISPATCH = {
-    ".pdf": read_pdf,
-    ".txt": read_txt,
-    ".md": read_md,
-    ".csv": read_csv,
-}
 
 def read_dir(path: str) -> list[str]:
     """Read a directory and return a list of file paths with supported extensions.
@@ -68,6 +62,14 @@ def read_csv(path: str) -> str:
         for row in reader:
             rows.append(", ".join(row))
     return "\n".join(rows)
+
+READER_DISPATCH = {
+    ".pdf": read_pdf,
+    ".txt": read_txt,
+    ".md": read_md,
+    ".csv": read_csv,
+}
+
 
 def read_document(doc: str) -> str:
     """Read a single document and return its raw text content.
